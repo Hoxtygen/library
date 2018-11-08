@@ -33,6 +33,25 @@ class BookController {
       newBook,
     });
   }
+
+  static deleteBook(req, res) {
+    const id = parseInt(req.params.id, 10);
+    let deleted;
+    Books.map((book, index) => {
+      if (book.id === id) {
+        Books.splice(index, 1);
+        deleted = book;
+      }
+    });
+    if (deleted) {
+      return res.status(200).json({
+        message: 'book deleted',
+      });
+    }
+    return res.status(404).json({
+      message: 'book not found',
+    });
+  }
 }
 
 export default BookController;
