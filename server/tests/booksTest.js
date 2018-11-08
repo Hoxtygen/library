@@ -1,7 +1,8 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import app from '../server';
 import { describe } from 'mocha';
+import app from '../server';
+
 
 chai.use(chaiHttp);
 chai.should();
@@ -16,6 +17,20 @@ describe('GET all books from the database', () => {
       });
   });
 });
+
+describe('GET a book from the database', () => {
+  it('should get a single book from the database', (done) => {
+    const id = 3;
+    chai.request(app)
+      .get(`/api/data/books/${id}`)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        done();
+      });
+  });
+});
+
 
 describe('POST a new book to the database', () => {
   it('should add a new book to the database', (done) => {
