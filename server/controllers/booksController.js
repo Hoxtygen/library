@@ -52,6 +52,20 @@ class BookController {
       message: 'book not found',
     });
   }
+
+  static getOne(req, res) {
+    const myBook = Books.find(book => book.id === parseInt(req.params.id, 10));
+    if (myBook) {
+      console.log(myBook);
+      return res.status(200).json({
+        message: 'book found',
+        myBook,
+      });
+    }
+    return res.status(404).json({
+      message: 'book not found',
+    });
+  }
 }
 
 export default BookController;
