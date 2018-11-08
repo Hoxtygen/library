@@ -56,7 +56,6 @@ class BookController {
   static getOne(req, res) {
     const myBook = Books.find(book => book.id === parseInt(req.params.id, 10));
     if (myBook) {
-      console.log(myBook);
       return res.status(200).json({
         message: 'book found',
         myBook,
@@ -64,6 +63,43 @@ class BookController {
     }
     return res.status(404).json({
       message: 'book not found',
+    });
+  }
+
+  static update(req, res) {
+    const {
+      title, Author, pubYear, publisher,
+    } = req.body;
+    if (!title || !Author || !pubYear || !publisher) {
+      res.status(400).json({
+        message: 'Missing fields not allowed',
+      });
+    }
+    const id = parseInt(req.params.id, 10);
+    let changedBook;
+    let ChangedBookIndex;
+    Books.map((book, index) => {
+      if (book.id === id) {
+        changedBook = book;
+        ChangedBookIndex = index;
+      }
+    });
+    if (!changedBook) {
+      return res.status(404).json({
+        message: 'book not found',
+      });
+    }
+    const updatedBook = {
+      id: changedBook.id,
+      title: title || changedBook.title,
+      Author: Author || changedBook.Author,
+      pubYear: pubYear || changedBook.pubYear,
+      publisher: publisher || changedBook.publisher,
+    };
+    Books.splice(ChangedBookIndex, 1, updatedBook);
+    return res.status(200).json({
+      message: 'book updated',
+      updatedBook,
     });
   }
 }
