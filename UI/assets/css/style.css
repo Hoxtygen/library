@@ -1,0 +1,44 @@
+body    {
+    padding: 0;
+    margin: 0;
+    line-height: 1.5;
+    font-family: 'EB Garamond', 'Noto Sans', sans-serif;
+    font-size: 1.2rem;
+    background-color: #3cb371;
+}
+
+#wrapper    {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 18% 1fr;
+    grid-template-rows: auto 1fr auto;
+}
+
+header  {
+    border: 1px solid red;
+    grid-column: 2;
+    grid-row: 1;
+    
+}
+
+aside   {
+    border: 1px solid rebeccapurple;
+    grid-column: 1;
+    grid-row: 1 / 3;
+}
+
+main    {
+    border: 1px solid goldenrod;
+    grid-column: 2;
+    grid-row: 2;
+}
+
+footer  {
+    border: 1px solid orange;
+    grid-column: 1 / 3;
+    grid-row: 3;
+}
+
+#logo   {
+    border: 1px solid lightsalmon;
+}
