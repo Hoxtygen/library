@@ -3,6 +3,15 @@ import dbConfig from '../database/dbConfig';
 import Books from '../database/books';
 
 class BookController {
+  /**
+   *
+   *
+   * @static
+   * @param {*} req
+   * @param {*} res
+   * @returns
+   * @memberof BookController
+   */
   static getAllBooks(req, res) {
     return res.status(200).json({
       message: 'All books available',
@@ -10,6 +19,15 @@ class BookController {
     });
   }
 
+  /**
+ *
+ *
+ * @static
+ * @param {*} req
+ * @param {*} res
+ * @returns
+ * @memberof BookController
+ */
   static addNew(req, res) {
     const {
       title, Author, pubYear, publisher,
@@ -34,6 +52,15 @@ class BookController {
     });
   }
 
+  /**
+ *
+ *
+ * @static
+ * @param {*} req
+ * @param {*} res
+ * @returns
+ * @memberof BookController
+ */
   static deleteBook(req, res) {
     const id = parseInt(req.params.id, 10);
     let deleted;
@@ -53,6 +80,15 @@ class BookController {
     });
   }
 
+  /**
+ *
+ *
+ * @static
+ * @param {*} req
+ * @param {*} res
+ * @returns
+ * @memberof BookController
+ */
   static getOne(req, res) {
     const myBook = Books.find(book => book.id === parseInt(req.params.id, 10));
     if (myBook) {
@@ -66,6 +102,15 @@ class BookController {
     });
   }
 
+  /**
+   *
+   *
+   * @static
+   * @param {*} req
+   * @param {*} res
+   * @returns
+   * @memberof BookController
+   */
   static update(req, res) {
     const {
       title, Author, pubYear, publisher,
