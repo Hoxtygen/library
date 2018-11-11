@@ -7,11 +7,22 @@ body    {
     background-color: #3cb371;
 }
 
+a   {
+    text-decoration: none;
+    color: #fff;
+}
+
+label   {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
 #wrapper    {
     min-height: 100vh;
     display: grid;
     grid-template-columns: 18% 1fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto 1fr auto auto;
 }
 
 header  {
@@ -28,7 +39,7 @@ aside   {
 
 main    {
     border: 1px solid goldenrod;
-    grid-column: 2;
+    grid-column: 2 / 3;
     grid-row: 2;
 }
 
@@ -69,7 +80,7 @@ footer  {
 }
 
 .form-control   {
-    width: 66%;
+    width: 60%;
     display: block;
     padding: 0.37em;
     height: 1.5rem;;
@@ -78,6 +89,14 @@ footer  {
     background-clip: padding-box;
     margin-right: 2px;
     border: none;
+}
+
+.form-group     {
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 input:focus     {
@@ -90,7 +109,7 @@ input:focus     {
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
-    padding: 0.375rem 0.75rem;
+    padding: 0.375rem 1rem;
     font-size: 1rem;
     line-height: 1.5;
 }
@@ -100,5 +119,77 @@ input:focus     {
     color: #fff;
     outline: none;
     border: none;
+    cursor: pointer;
+}
+
+.addNew {
+    display: block;
+    background-color: #333;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+}
+
+.form    {
+    position: relative; 
+    width: 60%;
+    margin: 50px auto 10px;
+    z-index: 15;
+    background: #222;
+    color: #fff;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-panel     {
+    padding: 60px calc(5% + 60px) 60px 60px;
+}
+
+/* .create     {
+    width: 100%;
+} */
+
+.form-group .form-control   {
+    border: 1px solid #c5c5c5;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 0 10px;
+    padding: 8px 5px;
+    width: 100%;
+    border-radius: 0;
+    color: #555;
+    box-shadow: none
+}
+
+textarea.form-control   {
+    min-height: 120px;
+    margin: 0 0 10px;
+    max-height: 300px;
+    max-width: 100%;
+    width: 100%;
+}
+
+.form-header    {
+    background: forestgreen;
+    text-align: center;
+    width: 100%;
+}
+
+.form-header h3     {
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.form-group button {
+    outline: none; 
+    width: 100%;
+    padding: 5px;
+    border: 0;
+    border-radius: 4px;
+    padding: 12px 20px;
+    text-transform: uppercase;
     cursor: pointer;
 }
