@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Library</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
@@ -12,8 +13,10 @@
         <header>
             <div class="header-content">
                 <form class="form-inline">
-                    <input type="text" class="form-control" name="search-box" id="search-box" placeholder="search">
-                    <button type="submit" class="btn btn-search">Search</button>
+                    <input type="text" class="search-box" id = "search-box" name="search-box" placeholder="search">
+                    <!-- <button type="submit" class="btn btn-search">Search</button> -->
+                    <label for="search-box"><span class="fa fa-search search-icon"></span></label>
+                    <input type="search" name="search-submit" id="search-submit">
                 </form>
                 <div class="image-user">
                     <img src="./assets/images/doug.jpg" alt="user picture" height="50px" width="50px">
