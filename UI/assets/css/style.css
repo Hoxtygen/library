@@ -251,3 +251,14 @@ textarea.form-control   {
     color: #fff;
     cursor: pointer;
 }
+
+/* book item */
+
+.container  {
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    display: flex;
+}
