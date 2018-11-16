@@ -259,6 +259,24 @@ textarea.form-control   {
     margin-left: auto;
     padding-right: 15px;
     padding-left: 15px;
-    width: 100%;
+}
+
+ .filter-bar     {
+    border-bottom: 1px solid red;
+    /* width: 100%;
     display: flex;
+    justify-content: space-around;
+    text-align: center;  */
+}
+
+.row    {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    flex-direction: column;
+}
+
+#container  {
+    padding: 20px;
 }
