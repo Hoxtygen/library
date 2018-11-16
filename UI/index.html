@@ -44,13 +44,31 @@
         </aside>
         <main>
             <section id="main-content">
-                <div class="container" id="container">
-
-                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="filter-bar">
+                            <span><strong>Filter by: </strong></span>
+                            <label for="author">Author</label>
+                            <select name="author" id="author">
+                                <option value="all">All</option>
+                                <option value="deaver">Jeffery Deaver</option>
+                                <option value="connelly">Michael Connelly</option>
+                                <option value="cook">Robin Cook</option>
+                            </select>
+                            <label for="category">Category</label>
+                            <select name="category" id="category">
+                                <option value="all">All</option>
+                                <option value="novel">Novel</option>
+                                <option value="text-book">Textbook</option>
+                            </select>                   
+                        </div><!-- filter-bar closed -->
+                        <div class="containe" id="container"></div>
+                    </div><!-- row closed -->
+                </div><!-- container closed -->
             </section>
         </main>
         <footer>
-            <h3>Oh my God, I'm made the footer. What have i done to deserve this?</h3>
+            <p>Oh my God, I'm made the footer. What have i done to deserve this?</p>
         </footer>
     </div>
 
