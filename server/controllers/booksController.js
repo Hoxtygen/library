@@ -19,6 +19,7 @@ class BookController {
     });
   }
 
+
   /**
  *
  *
@@ -99,6 +100,77 @@ class BookController {
     }
     return res.status(404).json({
       message: 'book not found',
+    });
+  }
+
+
+  /**
+ *
+ *
+ * @static
+ * @param {*} req
+ * @param {*} res
+ * @returns
+ * @memberof BookController
+ */
+  static getTitle(req, res) {
+    const query = req.params;
+    const myBook = Books.find(book => book.title === query.title);
+    if (myBook) {
+      console.log(query.params);
+      return res.status(200).json({
+        message: 'result',
+        myBook,
+      });
+    }
+    return res.status(404).json({
+      message: 'book title not found',
+    });
+  }
+
+  /**
+ *
+ *
+ * @static
+ * @param {*} req
+ * @param {*} res
+ * @returns
+ * @memberof BookController
+ */
+  static getAuthor(req, res) {
+    const query = req.params;
+    const myAuthor = Books.find(book => book.author === query.author);
+    if (myAuthor) {
+      return res.status(200).json({
+        message: 'result',
+        myAuthor,
+      });
+    }
+    return res.status(404).json({
+      message: 'Author not found',
+    });
+  }
+
+  /**
+ *
+ *
+ * @static
+ * @param {*} req
+ * @param {*} res
+ * @returns
+ * @memberof BookController
+ */
+  static getCategory(req, res) {
+    const query = req.params;
+    const myCategory = Books.find(book => book.category === query.category);
+    if (myCategory) {
+      return res.status(200).json({
+        message: 'result',
+        myCategory,
+      });
+    }
+    return res.status(404).json({
+      message: 'Author not found',
     });
   }
 
