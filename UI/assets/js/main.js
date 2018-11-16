@@ -7,7 +7,7 @@ function getAllBooks() {
     <div class = 'book-item'>
         <img src = ${book.image}>
         <p><a href = "#">${book.title}</p>
-        <p>${book.Author}</p>
+        <p>${book.author}</p>
     </div>
         
         `).join('')}
