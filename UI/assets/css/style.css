@@ -35,6 +35,7 @@ aside   {
     border: 1px solid rebeccapurple;
     grid-column: 1;
     grid-row: 1 / 3;
+    text-align: center;
 }
 
 main    {
@@ -122,13 +123,19 @@ input:focus     {
     cursor: pointer;
 }
 
-.addNew {
+.addNew, .side {
     display: block;
-    background-color: #333;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    
+}
+
+.addNew     {
     border: 1px solid #ccc;
     border-radius: 50px;
+    background-color: #333;
+    padding-top: 10px;
+    padding-bottom: 10px
 }
 
 .form    {
@@ -279,4 +286,22 @@ textarea.form-control   {
 
 #container  {
     padding: 20px;
+}
+
+.sidebar    {
+    border: 1px solid yellow;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar-nav     {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.section-title      {
+    background: #25d;
+    margin-bottom: 0;
 }
