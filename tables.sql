@@ -1,8 +1,3 @@
 \c library
-CREATE TABLE IF NOT EXISTS leaders (
-    id SERIAL PRIMARY KEY NOT NULL,
-    title VARCHAR (400) NOT NULL,
-    author VARCHAR (100) NOT NULL,
-    pubYear INT NOT NULL,
-    publisher VARCHAR (100) NOT NULL
-)
+
+INSERT INTO book_library.books (title, pubyear, publisher, author_id, category_id, image_url) VALUES ('The SabbathDay River', 1999, 'Jove Books Ltd', 9, 1, 'http://i38.photobucket.com/albums/e143/hoxtygen/sabbathDay_zps3zsxhz3z.jpg');
