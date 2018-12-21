@@ -13,10 +13,13 @@ class BookController {
    * @memberof BookController
    */
   static getAllBooks(req, res) {
-    return res.status(200).json({
-      message: 'All books available',
-      Books,
-    });
+    dbConfig.query('SELECT * FROM book_library.books NATURAL JOIN authors')
+      .then((books) => {
+        res.status(200).json({
+          message: 'All books',
+          data: books.rows,
+        });
+      });
   }
 
 
@@ -63,10 +66,10 @@ class BookController {
  * @memberof BookController
  */
   static deleteBook(req, res) {
-    const id = parseInt(req.params.id, 10);
+    const bookId = parseInt(req.params.book_id, 10);
     let deleted;
     Books.map((book, index) => {
-      if (book.id === id) {
+      if (book.book_id === bookId) {
         Books.splice(index, 1);
         deleted = book;
       }
@@ -91,7 +94,7 @@ class BookController {
  * @memberof BookController
  */
   static getOne(req, res) {
-    const myBook = Books.find(book => book.id === parseInt(req.params.id, 10));
+    const myBook = Books.find(book => book.book_id === parseInt(req.params.book_id, 10));
     if (myBook) {
       return res.status(200).json({
         message: 'book found',
