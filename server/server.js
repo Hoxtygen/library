@@ -1,7 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import booksRouter from './routes/booksRoute';
-import authorsRouter from './routes/authorsRoute'
+import authorsRouter from './routes/authorsRoute';
+
 
 const app = express();
 
