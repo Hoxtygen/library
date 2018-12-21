@@ -5,5 +5,6 @@ const authorsRouter = Router();
 authorsRouter.post('/authors', AuthorsController.addNew)
 authorsRouter.get('/authors', AuthorsController.getAllAuthors);
 authorsRouter.get('/authors/:author_id', AuthorsController.getOne);
+authorsRouter.delete('/authors/:author_id', AuthorsController.delete);
 
 export default authorsRouter;
