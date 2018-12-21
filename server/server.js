@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 //  routes
 app.get('/', (req, res) => {
   res.json({
-    message: 'Welcome to my personal library, hope you find something that might interest you',
+    message: 'Welcome to my personal library, hope you find a book worth reading in my collection',
   });
 });
 app.use('/api/data', booksRouter);
