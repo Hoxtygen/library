@@ -66,6 +66,29 @@ class AuthorsController {
         });
       });
   }
+
+  static delete(req, res) {
+    const { author_id } = req.params;
+    dbConfig.query(`DELETE FROM book_library.authors WHERE author_id = ${author_id}`)
+      .then((author) => {
+        if (author.rowCount) {
+          res.status(200).json({
+            message: 'Author deleted',
+          });
+        } else {
+          res.status(404).json({
+            status: 'error',
+            message: 'Author not found',
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(400).json({
+          status: 'error',
+          message: err.message,
+        });
+      });
+  }
 }
 
 export default AuthorsController;
