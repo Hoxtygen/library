@@ -1,5 +1,5 @@
 function getAllBooks() {
-  fetch('http://localhost:5001/api/data/books')
+  fetch('http://localhost:5001/api/v1/books')
     .then(res => res.json())
     .then((parsedData) => {
       console.log(parsedData);

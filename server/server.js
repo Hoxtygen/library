@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import booksRouter from './routes/booksRoute';
+import authorsRouter from './routes/authorsRoute'
 
 const app = express();
 
@@ -22,7 +23,8 @@ app.get('/', (req, res) => {
     message: 'Welcome to my personal library, hope you find a book worth reading in my collection',
   });
 });
-app.use('/api/data', booksRouter);
+app.use('/api/v1', booksRouter);
+app.use('/api/v1', authorsRouter);
 
 //  fire up the server
 app.listen(port, () => console.log(`Server running on port: ${port}`));
