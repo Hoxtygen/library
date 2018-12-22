@@ -87,7 +87,7 @@ class BookController {
       });
   }
 
-  static delete(req, res) {
+  static deleteBook(req, res) {
     const { book_id } = req.params;
     dbConfig.query(`DELETE FROM book_library.books WHERE book_id = ${book_id}`)
       .then((book) => {
@@ -99,6 +99,39 @@ class BookController {
           res.status(404).json({
             status: 'error',
             message: 'Book not found',
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(404).json({
+          status: 'error',
+          message: err.message,
+        });
+      });
+  }
+
+  static update(req, res) {
+    const {
+      title, pubyear, publisher, author_id, category_id, image_url,
+    } = req.body;
+    if (!title || !pubyear || !publisher || !author_id || !category_id || !image_url) {
+      return res.json(400).json({
+        message: 'missing fields not allowed',
+      });
+    }
+    const id = parseInt(req.params.book_id, 10);
+    const query = `UPDATE book_library.books SET title='${title}', pubyear = '${pubyear}', publisher = '${publisher}', author_id = '${author_id}', category_id = '${category_id}', image_url = '${image_url}'  WHERE book_id = ${id} RETURNING *`;
+    dbConfig.query(query)
+      .then((book) => {
+        if (book.rowCount > 0) {
+          res.status(200).json({
+            message: 'Book updated',
+            data: book.rows,
+          });
+        } else {
+          res.status(400).json({
+            status: 'error',
+            message: 'Book could not be updated',
           });
         }
       })
