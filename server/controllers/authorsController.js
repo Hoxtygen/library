@@ -67,6 +67,14 @@ class AuthorsController {
       });
   }
 
+  /**
+ *
+ *
+ * @static
+ * @param {*} req
+ * @param {*} res
+ * @memberof AuthorsController
+ */
   static delete(req, res) {
     const { author_id } = req.params;
     dbConfig.query(`DELETE FROM book_library.authors WHERE author_id = ${author_id}`)
@@ -84,6 +92,37 @@ class AuthorsController {
       })
       .catch((err) => {
         res.status(400).json({
+          status: 'error',
+          message: err.message,
+        });
+      });
+  }
+
+  static update(req, res) {
+    const { author_name } = req.body;
+    if (!author_name) {
+      return res.staus(400).json({
+        message: 'missing field not allowed',
+      });
+    }
+    const id = parseInt(req.params.author_id, 10);
+    const query = `UPDATE book_library.authors SET author_name='${author_name}' WHERE author_id = ${id} RETURNING *`;
+    dbConfig.query(query)
+      .then((authorName) => {
+        if (authorName.rowCount > 0) {
+          res.status(200).json({
+            message: 'Author information updated',
+            data: authorName.rows,
+          });
+        } else {
+          res.status(400).json({
+            status: 'error',
+            message: 'Author information could not be updated',
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(404).json({
           status: 'error',
           message: err.message,
         });
