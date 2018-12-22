@@ -45,6 +45,47 @@ class BookController {
         });
       });
   }
+
+  static addNew(req, res) {
+    const {
+      title, pubyear, publisher, author_id, category_id, image_url,
+    } = req.body;
+    if (!title || !pubyear || !publisher || !author_id || !category_id || !image_url) {
+      return res.json(400).json({
+        message: 'missing fields not allowed',
+      });
+    }
+    const newBook = {
+      title,
+      pubyear,
+      publisher,
+      author_id,
+      category_id,
+      image_url,
+    };
+
+    dbConfig.query('INSERT INTO book_library.books (title, pubyear, publisher, author_id, category_id, image_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *', [title, pubyear, publisher, author_id, category_id, image_url])
+      .then((book) => {
+        if (book.rowCount > 0) {
+          res.status(200).json({
+            message: 'Book added',
+            data: book.rows,
+          });
+        } else {
+          res.status(400).json({
+            status: 'error',
+            message: 'Book could not be added',
+
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(400).json({
+          status: 'error',
+          message: err.message,
+        });
+      });
+  }
 }
 
 export default BookController;
