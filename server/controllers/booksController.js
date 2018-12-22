@@ -86,6 +86,29 @@ class BookController {
         });
       });
   }
+
+  static delete(req, res) {
+    const { book_id } = req.params;
+    dbConfig.query(`DELETE FROM book_library.books WHERE book_id = ${book_id}`)
+      .then((book) => {
+        if (book.rowCount) {
+          res.status(200).json({
+            message: 'Book deleted',
+          });
+        } else {
+          res.status(404).json({
+            status: 'error',
+            message: 'Book not found',
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(404).json({
+          status: 'error',
+          message: err.message,
+        });
+      });
+  }
 }
 
 export default BookController;
