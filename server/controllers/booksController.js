@@ -16,6 +16,7 @@ class BookController {
     dbConfig.query('SELECT * FROM book_library.books NATURAL JOIN authors NATURAL JOIN categories')
       .then((books) => {
         res.status(200).json({
+          status: true,
           message: 'All books',
           data: books.rows,
         });
@@ -28,6 +29,7 @@ class BookController {
       .then((books) => {
         if (books.rowCount > 0) {
           res.status(200).json({
+            status: true,
             message: 'Book found',
             data: books.rows,
           });
@@ -52,6 +54,7 @@ class BookController {
     } = req.body;
     if (!title || !pubyear || !publisher || !author_id || !category_id || !image_url) {
       return res.json(400).json({
+        status: false,
         message: 'missing fields not allowed',
       });
     }
@@ -80,10 +83,17 @@ class BookController {
         }
       })
       .catch((err) => {
-        res.status(400).json({
-          status: 'error',
-          message: err.message,
-        });
+        if (err.message.includes('unique')) {
+          res.status(400).json({
+            status: 'error',
+            message: 'book already exists',
+          });
+        } else {
+          res.status(400).json({
+            status: 'error',
+            message: err.message,
+          });
+        }
       });
   }
 
@@ -93,6 +103,7 @@ class BookController {
       .then((book) => {
         if (book.rowCount) {
           res.status(200).json({
+            status: true,
             message: 'Book deleted',
           });
         } else {
@@ -116,6 +127,7 @@ class BookController {
     } = req.body;
     if (!title || !pubyear || !publisher || !author_id || !category_id || !image_url) {
       return res.json(400).json({
+        status: false,
         message: 'missing fields not allowed',
       });
     }
@@ -124,16 +136,16 @@ class BookController {
     dbConfig.query(query)
       .then((book) => {
         if (book.rowCount > 0) {
-          res.status(200).json({
+          return res.status(200).json({
+            status: true,
             message: 'Book updated',
             data: book.rows,
           });
-        } else {
-          res.status(400).json({
-            status: 'error',
-            message: 'Book could not be updated',
-          });
         }
+        res.status(400).json({
+          status: 'error',
+          message: 'Book could not be updated',
+        });
       })
       .catch((err) => {
         res.status(404).json({
