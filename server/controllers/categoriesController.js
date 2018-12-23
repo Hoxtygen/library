@@ -41,6 +41,43 @@ class CategoriesController {
         });
       });
   }
+
+  static addNew(req, res) {
+    const { category_name } = req.body;
+    if (!category_name) {
+      return res.status(400).json({
+        message: 'Missing fields not allowed',
+      });
+    }
+    const newCategory = category_name;
+    dbConfig.query('INSERT INTO book_library.categories (category_name) VALUES ($1) RETURNING *', [category_name])
+      .then((category) => {
+        if (category.rowCount > 0) {
+          res.status(200).json({
+            message: 'Category added',
+            data: category.rows,
+          });
+        } else {
+          res.status(400).json({
+            status: 'error',
+            message: 'new category could not be added',
+          });
+        }
+      })
+      .catch((err) => {
+        if (err.message.includes('unique')) {
+          res.status(400).json({
+            status: 'error',
+            message: 'category already exists in the database',
+          });
+        } else {
+          res.status(400).json({
+            status: 'error',
+            message: err.message,
+          });
+        }
+      });
+  }
 }
 
 export default CategoriesController;
