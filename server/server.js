@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import booksRouter from './routes/booksRoute';
 import authorsRouter from './routes/authorsRoute';
+import categoriesRouter from './routes/categoriesRoute';
 
 
 const app = express();
@@ -26,7 +27,7 @@ app.get('/', (req, res) => {
 });
 app.use('/api/v1', booksRouter);
 app.use('/api/v1', authorsRouter);
-
+app.use('/api/v1', categoriesRouter);
 //  fire up the server
 app.listen(port, () => console.log(`Server running on port: ${port}`));
 
