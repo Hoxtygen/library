@@ -6,6 +6,7 @@ class CategoriesController {
     dbConfig.query('SELECT * FROM book_library.categories')
       .then((categories) => {
         res.status(200).json({
+          status: true,
           message: 'All categories',
           data: categories.rows,
         });
@@ -24,7 +25,8 @@ class CategoriesController {
       .then((category) => {
         if (category.rowCount > 0) {
           res.status(200).json({
-            status: 'Category found',
+            status: true,
+            message: 'Category found',
             data: category.rows,
           });
         } else {
@@ -54,6 +56,7 @@ class CategoriesController {
       .then((category) => {
         if (category.rowCount > 0) {
           res.status(200).json({
+            status: true,
             message: 'Category added',
             data: category.rows,
           });
@@ -76,6 +79,30 @@ class CategoriesController {
             message: err.message,
           });
         }
+      });
+  }
+
+  static delete(req, res) {
+    const { category_id } = req.params;
+    dbConfig.query(`DELETE FROM book_library.categories WHERE category_id = ${category_id}`)
+      .then((category) => {
+        if (category.rowCount) {
+          res.status(200).json({
+            status: true,
+            message: 'category deleted',
+          });
+        } else {
+          res.status(404).json({
+            status: 'error',
+            message: 'category not found',
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(400).json({
+          status: 'error',
+          message: err.message,
+        });
       });
   }
 }
