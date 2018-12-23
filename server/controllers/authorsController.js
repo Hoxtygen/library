@@ -7,6 +7,7 @@ class AuthorsController {
     dbConfig.query('SELECT * FROM book_library.authors')
       .then((authors) => {
         res.status(200).json({
+          status: true,
           message: 'All authors',
           data: authors.rows,
         });
@@ -19,6 +20,7 @@ class AuthorsController {
       .then((authors) => {
         if (authors.rowCount > 0) {
           res.status(200).json({
+            status: true,
             message: 'author found',
             data: authors.rows,
           });
@@ -41,6 +43,7 @@ class AuthorsController {
     const { author_name } = req.body;
     if (!author_name) {
       return res.status(400).json({
+        status: false,
         message: 'missing fields not allowed',
       });
     }
@@ -49,6 +52,7 @@ class AuthorsController {
       .then((author) => {
         if (author.rowCount > 0) {
           res.status(200).json({
+            status: true,
             message: 'Author added',
             data: author.rows,
           });
@@ -60,10 +64,17 @@ class AuthorsController {
         }
       })
       .catch((err) => {
-        res.status(400).json({
-          status: 'error',
-          message: err.message,
-        });
+        if (err.message.includes('unique')) {
+          res.status(400).json({
+            status: 'error',
+            message: 'author already exists',
+          });
+        } else {
+          res.status(400).json({
+            status: 'error',
+            message: err.message,
+          }); 
+        }
       });
   }
 
@@ -81,6 +92,7 @@ class AuthorsController {
       .then((author) => {
         if (author.rowCount) {
           res.status(200).json({
+            status: true,
             message: 'Author deleted',
           });
         } else {
@@ -111,6 +123,7 @@ class AuthorsController {
       .then((authorName) => {
         if (authorName.rowCount > 0) {
           res.status(200).json({
+            status: true,
             message: 'Author information updated',
             data: authorName.rows,
           });

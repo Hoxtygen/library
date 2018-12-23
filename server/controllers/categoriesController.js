@@ -71,7 +71,7 @@ class CategoriesController {
         if (err.message.includes('unique')) {
           res.status(400).json({
             status: 'error',
-            message: 'category already exists in the database',
+            message: 'category already exists',
           });
         } else {
           res.status(400).json({
