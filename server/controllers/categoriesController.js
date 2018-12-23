@@ -105,6 +105,36 @@ class CategoriesController {
         });
       });
   }
+
+  static update(req, res) {
+    const { category_name } = req.body;
+    if (!category_name) {
+      return res.status(400).json({
+        message: 'missing fields not allowed',
+      });
+    }
+    const id = parseInt(req.params.category_id, 10);
+    const query = `UPDATE book_library.categories SET category_name = '${category_name}' WHERE category_id = ${id} RETURNING *`;
+    dbConfig.query(query)
+      .then((categoryName) => {
+        if (categoryName.rowCount > 0) {
+          res.status(200).json({
+            status: true,
+            message: 'category successfully updated',
+            data: categoryName.rows,
+          });
+        } else {
+          res.status(400).json({
+            status: 'error',
+            message: 'category could not be updated',
+          });
+        }
+      })
+      .catch(err => res.status(404).json({
+        status: 'error',
+        message: err.message,
+      }));
+  }
 }
 
 export default CategoriesController;
