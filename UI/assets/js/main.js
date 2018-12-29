@@ -2,7 +2,6 @@ function getAllBooks() {
   fetch('http://localhost:5001/api/v1/books')
     .then(res => res.json())
     .then((parsedData) => {
-      console.log(parsedData);
       const bookContainer = document.getElementById('book-container').innerHTML = `
     ${parsedData.data.map(data => `
     <div class="col-3 mx">
@@ -22,6 +21,33 @@ function getAllBooks() {
 }
 getAllBooks();
 
-function getAllAuthors() {
 
+function getAllCategories() {
+  fetch('http://localhost:5001/api/v1/categories')
+    .then(res => res.json())
+    .then((parsedCategories) => {
+      // console.log(parsedCategories);
+      const myData = parsedCategories;
+      // console.log(myData)
+      const select = document.getElementById('select');
+
+      myData.data.map((data) => {
+        console.log(data);
+        const option = document.createElement('OPTION');
+        const text = document.createTextNode(data.category_name);
+        option.appendChild(text);
+        select.insertBefore(option, select.lastChild);
+      });
+    });
 }
+getAllCategories();
+
+
+function getAllAuthors() {
+  fetch('http://localhost:5001/api/v1/authors')
+    .then(res => res.json())
+    .then((authors) => {
+      console.log(authors);
+    });
+}
+getAllAuthors();
