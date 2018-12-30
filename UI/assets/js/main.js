@@ -26,9 +26,7 @@ function getAllCategories() {
   fetch('http://localhost:5001/api/v1/categories')
     .then(res => res.json())
     .then((parsedCategories) => {
-      // console.log(parsedCategories);
       const myData = parsedCategories;
-      // console.log(myData)
       const select = document.getElementById('select');
 
       myData.data.map((data) => {
@@ -41,13 +39,3 @@ function getAllCategories() {
     });
 }
 getAllCategories();
-
-
-function getAllAuthors() {
-  fetch('http://localhost:5001/api/v1/authors')
-    .then(res => res.json())
-    .then((authors) => {
-      console.log(authors);
-    });
-}
-getAllAuthors();
