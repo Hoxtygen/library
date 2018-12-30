@@ -1,8 +1,10 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import validator from 'express-validator';
 import booksRouter from './routes/booksRoute';
 import authorsRouter from './routes/authorsRoute';
 import categoriesRouter from './routes/categoriesRoute';
+
 
 
 const app = express();
@@ -13,11 +15,12 @@ const port = process.env.PORT || 5001;
 //  use bodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use((req, res, next) => {
+app.use(validator());
+/* app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
-});
+}); */
 
 //  routes
 app.get('/', (req, res) => {

@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import validation from 'express-validator';
 import dbConfig from '../database/dbConfig';
 
 
@@ -40,13 +41,16 @@ class AuthorsController {
   }
 
   static addNew(req, res) {
-    const { author_name } = req.body;
-    if (!author_name) {
+    req.checkBody('author_name', 'Author name is required').notEmpty();
+    const errors = req.validationErrors();
+    if (errors) {
+      console.log(errors);
       return res.status(400).json({
         status: false,
-        message: 'missing fields not allowed',
+        messsage: errors,
       });
     }
+    const { author_name } = req.body;
     const newAuthor = author_name;
     dbConfig.query('INSERT INTO book_library.authors (author_name) VALUES ($1) RETURNING *', [author_name])
       .then((author) => {
@@ -67,7 +71,7 @@ class AuthorsController {
         if (err.message.includes('unique')) {
           res.status(400).json({
             status: 'error',
-            message: 'author already exists',
+            message: 'Author name already exists',
           });
         } else {
           res.status(400).json({

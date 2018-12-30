@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
+import validator from 'express-validator';
 import dbConfig from '../database/dbConfig';
 import Books from '../database/books';
+
 
 class BookController {
   /**
@@ -49,52 +51,62 @@ class BookController {
   }
 
   static addNew(req, res) {
-    const {
-      title, pubyear, publisher, author_id, category_id, image_url,
-    } = req.body;
-    if (!title || !pubyear || !publisher || !author_id || !category_id || !image_url) {
-      return res.json(400).json({
+    req.checkBody('title', 'Title is required').notEmpty();
+    req.checkBody('pubyear', 'Publication year is required').notEmpty();
+    req.checkBody('publisher', 'Publisher name is required').notEmpty();
+    req.checkBody('author_id', 'Author id is required').notEmpty();
+    req.checkBody('category_id', 'Category id is required').notEmpty();
+    req.checkBody('image_url', 'Image url is required').notEmpty();
+    const errors = req.validationErrors();
+    if (errors) {
+      console.log(errors[0].msg);
+      res.status(400).json({
         status: false,
-        message: 'missing fields not allowed',
+        message: errors,
       });
+    } else {
+      const {
+        title, pubyear, publisher, author_id, category_id, image_url,
+      } = req.body;
+
+      const newBook = {
+        title,
+        pubyear,
+        publisher,
+        author_id,
+        category_id,
+        image_url,
+      };
+  
+      dbConfig.query('INSERT INTO book_library.books (title, pubyear, publisher, author_id, category_id, image_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *', [title, pubyear, publisher, author_id, category_id, image_url])
+        .then((book) => {
+          if (book.rowCount > 0) {
+            res.status(200).json({
+              message: 'Book added',
+              data: book.rows,
+            });
+          } else {
+            res.status(400).json({
+              status: 'error',
+              message: 'Book could not be added',
+  
+            });
+          }
+        })
+        .catch((err) => {
+          if (err.message.includes('unique')) {
+            res.status(400).json({
+              status: 'error',
+              message: 'book already exists',
+            });
+          } else {
+            res.status(400).json({
+              status: 'error',
+              message: err.message,
+            });
+          }
+        });
     }
-    const newBook = {
-      title,
-      pubyear,
-      publisher,
-      author_id,
-      category_id,
-      image_url,
-    };
-
-    dbConfig.query('INSERT INTO book_library.books (title, pubyear, publisher, author_id, category_id, image_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *', [title, pubyear, publisher, author_id, category_id, image_url])
-      .then((book) => {
-        if (book.rowCount > 0) {
-          res.status(200).json({
-            message: 'Book added',
-            data: book.rows,
-          });
-        } else {
-          res.status(400).json({
-            status: 'error',
-            message: 'Book could not be added',
-
-          });
-        }
-      })
-      .catch((err) => {
-        if (err.message.includes('unique')) {
-          res.status(400).json({
-            status: 'error',
-            message: 'book already exists',
-          });
-        } else {
-          res.status(400).json({
-            status: 'error',
-            message: err.message,
-          });
-        }
-      });
   }
 
   static deleteBook(req, res) {

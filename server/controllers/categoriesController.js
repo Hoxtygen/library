@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import validator from 'express-validator';
 import dbConfig from '../database/dbConfig';
 
 class CategoriesController {
@@ -45,12 +46,16 @@ class CategoriesController {
   }
 
   static addNew(req, res) {
-    const { category_name } = req.body;
-    if (!category_name) {
+    req.checkBody('category_name', 'Category name is required').notEmpty();
+    const errors = req.validationErrors();
+    if (errors) {
+      console.log(errors);
       return res.status(400).json({
-        message: 'Missing fields not allowed',
+        status: false,
+        message: errors,
       });
     }
+    const { category_name } = req.body;
     const newCategory = category_name;
     dbConfig.query('INSERT INTO book_library.categories (category_name) VALUES ($1) RETURNING *', [category_name])
       .then((category) => {
@@ -71,7 +76,7 @@ class CategoriesController {
         if (err.message.includes('unique')) {
           res.status(400).json({
             status: 'error',
-            message: 'category already exists',
+            message: 'category name already exists',
           });
         } else {
           res.status(400).json({
