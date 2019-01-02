@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import AuthorsController from '../controllers/authorsController';
 
+
 const authorsRouter = Router();
 authorsRouter.post('/authors', AuthorsController.addNew);
 authorsRouter.get('/authors', AuthorsController.getAllAuthors);

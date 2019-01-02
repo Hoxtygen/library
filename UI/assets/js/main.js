@@ -1,3 +1,4 @@
+/* eslint-disable no-multi-assign */
 function getAllBooks() {
   fetch('http://localhost:5001/api/v1/books')
     .then(res => res.json())
@@ -26,28 +27,14 @@ function getAllCategories() {
   fetch('http://localhost:5001/api/v1/categories')
     .then(res => res.json())
     .then((parsedCategories) => {
-      // console.log(parsedCategories);
       const myData = parsedCategories;
-      // console.log(myData)
       const select = document.getElementById('select');
-
       myData.data.map((data) => {
-        console.log(data);
         const option = document.createElement('OPTION');
-        const text = document.createTextNode(data.category_name);
-        option.appendChild(text);
+        option.value = data.category_id;
+        option.text = data.category_name;
         select.insertBefore(option, select.lastChild);
       });
     });
 }
 getAllCategories();
-
-
-function getAllAuthors() {
-  fetch('http://localhost:5001/api/v1/authors')
-    .then(res => res.json())
-    .then((authors) => {
-      console.log(authors);
-    });
-}
-getAllAuthors();
