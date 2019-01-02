@@ -1,3 +1,4 @@
+/* eslint-disable no-multi-assign */
 function getAllBooks() {
   fetch('http://localhost:5001/api/v1/books')
     .then(res => res.json())
@@ -28,12 +29,10 @@ function getAllCategories() {
     .then((parsedCategories) => {
       const myData = parsedCategories;
       const select = document.getElementById('select');
-
       myData.data.map((data) => {
-        console.log(data);
         const option = document.createElement('OPTION');
-        const text = document.createTextNode(data.category_name);
-        option.appendChild(text);
+        option.value = data.category_id;
+        option.text = data.category_name;
         select.insertBefore(option, select.lastChild);
       });
     });

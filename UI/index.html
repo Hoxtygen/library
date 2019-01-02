@@ -93,7 +93,7 @@
                                         <!-- <span class="closeBtn">&times;</span> -->
                                         <h2>Add New Book</h2>
                                     </div>
-                                    <form action="">
+                                    <form action="" method="POST" class="bookForm" onsubmit="return validateForm()">
                                         <div class="single-input mb-10">
                                             <input type="text" name="title" id="title" required placeholder="Enter the book title">
                                         </div>
@@ -112,10 +112,10 @@
                                             </select>
                                         </div>
                                         <div class="single-input mb-10">
-                                            <input type="text" name="imageUrl" id="imageUrl" required placeholder="Enter the full book image url">
+                                            <input type="url" name="imageUrl" id="imageUrl" required placeholder="Enter the full book image url">
                                         </div>
                                         <div class="d-flex jcc">
-                                            <button type="submit" class="primary-btn mt-10 d-if text-uppercase aic">Submit</button>
+                                            <button type="submit" id = 'submit' class="primary-btn mt-10 d-if text-uppercase aic">Submit</button>
                                         </div>
                                     </form>
                                 </div>

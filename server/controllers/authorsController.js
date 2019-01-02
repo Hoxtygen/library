@@ -41,7 +41,7 @@ class AuthorsController {
   }
 
   static addNew(req, res) {
-    req.checkBody('author_name', 'Author name is required').notEmpty();
+    req.checkBody('author_name', 'Author name is required').notEmpty().trim();
     const errors = req.validationErrors();
     if (errors) {
       console.log(errors);

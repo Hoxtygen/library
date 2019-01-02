@@ -51,12 +51,16 @@ class BookController {
   }
 
   static addNew(req, res) {
-    req.checkBody('title', 'Title is required').notEmpty();
-    req.checkBody('pubyear', 'Publication year is required').notEmpty();
-    req.checkBody('publisher', 'Publisher name is required').notEmpty();
-    req.checkBody('author_id', 'Author id is required').notEmpty();
-    req.checkBody('category_id', 'Category id is required').notEmpty();
-    req.checkBody('image_url', 'Image url is required').notEmpty();
+    req.checkBody('title', 'Title is required').notEmpty().trim();
+    req.checkBody('pubyear', 'Publication year is required').notEmpty().isNumeric().withMessage('input must be a number')
+      .isLength({ min: 4, max: 4 })
+      .withMessage('input must be at least four characters long');
+    req.checkBody('publisher', 'Publisher name is required').notEmpty().trim();
+    req.checkBody('author_id', 'Author id is required').isNumeric().notEmpty();
+    req.checkBody('category_id', 'Category id is required').isNumeric().notEmpty();
+    req.checkBody('image_url').notEmpty().withMessage('Image url is required')
+      .isURL()
+      .withMessage('invalid url');
     const errors = req.validationErrors();
     if (errors) {
       console.log(errors[0].msg);
@@ -77,7 +81,7 @@ class BookController {
         category_id,
         image_url,
       };
-  
+
       dbConfig.query('INSERT INTO book_library.books (title, pubyear, publisher, author_id, category_id, image_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *', [title, pubyear, publisher, author_id, category_id, image_url])
         .then((book) => {
           if (book.rowCount > 0) {
@@ -89,7 +93,7 @@ class BookController {
             res.status(400).json({
               status: 'error',
               message: 'Book could not be added',
-  
+
             });
           }
         })

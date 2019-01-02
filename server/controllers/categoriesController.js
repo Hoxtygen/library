@@ -46,7 +46,7 @@ class CategoriesController {
   }
 
   static addNew(req, res) {
-    req.checkBody('category_name', 'Category name is required').notEmpty();
+    req.checkBody('category_name', 'Category name is required').notEmpty().trim();
     const errors = req.validationErrors();
     if (errors) {
       console.log(errors);

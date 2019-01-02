@@ -5,12 +5,11 @@ import booksRouter from './routes/booksRoute';
 import authorsRouter from './routes/authorsRoute';
 import categoriesRouter from './routes/categoriesRoute';
 
-
-
 const app = express();
 
 //  port
 const port = process.env.PORT || 5001;
+app.use(express.static(__dirname));
 
 //  use bodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
