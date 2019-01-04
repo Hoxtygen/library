@@ -51,6 +51,7 @@ class BookController {
   }
 
   static addNew(req, res) {
+    console.log(req.body);
     req.checkBody('title', 'Title is required').notEmpty().trim();
     req.checkBody('pubyear', 'Publication year is required').notEmpty().isNumeric().withMessage('input must be a number')
       .isLength({ min: 4, max: 4 })

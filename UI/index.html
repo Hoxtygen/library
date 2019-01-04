@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -93,21 +93,23 @@
                                         <!-- <span class="closeBtn">&times;</span> -->
                                         <h2>Add New Book</h2>
                                     </div>
-                                    <form action="" method="POST" class="bookForm" onsubmit="return validateForm()">
+                                    <form method="POST" class="bookForm" name="bookForm">
                                         <div class="single-input mb-10">
                                             <input type="text" name="title" id="title" required placeholder="Enter the book title">
                                         </div>
                                         <div class="single-input mb-10">
-                                            <input type="text" name="author" id="author" required placeholder="Enter author's name">
+                                            <select name="author_id" id="authorId">
+                                                <option value="" disabled selected>Select an author</option>
+                                            </select>
                                         </div>
                                         <div class="single-input mb-10">
-                                            <input type="number" name="pubYear" id="pubYear" required placeholder="Enter book year of publication">
+                                            <input type="number" name="pubyear" id="pub_year" required placeholder="Enter book year of publication">
                                         </div>
                                         <div class="single-input mb-10">
                                             <input type="text" name="publisher" id="publisher" required placeholder="Enter the book publisher">
                                         </div>
                                         <div class="single-input mb-10">
-                                            <select name="category" id="select" required>
+                                            <select name="category_id" id="select" required>
                                                 <option value="" disabled selected>Select a category</option>
                                             </select>
                                         </div>
@@ -132,13 +134,18 @@
                 <p>Copyright&COPY; Hoxtygen. All right reserved</p>
             </div>
         </footer>
+        <form action="" method="post"></form>
     </div>
 
+    <script src="./assets/js/jquery-3.1.1.min.js"></script>
+    <script src="./assets//js/validate.js"></script>
     <script src="./assets/js/main.js"></script>
     <script src="./assets/js/modal.js"></script>
+    <script src="./assets/js/validate.js"></script>
+    <script src="./assets/js/script.js"></script>
     <script>
         //  https://codepen.io/sdaitzman/pen/rmqfB
-        document.addEventListener("touchstart", function(){}, true);
+        //document.addEventListener("touchstart", function(){}, true);
     </script>
 </body>
 </html>
