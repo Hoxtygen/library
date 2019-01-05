@@ -1,5 +1,6 @@
 $(document).ready(() => {
-  $('#bookForm').on('submit', (event) => {
+  $('#submit').on('click', (event) => {
+    console.log('hello, i am clicked');
     const title = $('#title');
     const author_id = $('#authorId');
     const pubyear = $('#pub_year');
@@ -18,14 +19,24 @@ $(document).ready(() => {
         pubyear: pubyear.val(),
         category_id: category_id.val(),
         publisher: publisher.val(),
-        imageUrl: imageUrl.val(),
+        image_url: imageUrl.val(),
       }),
       success: (response) => {
         console.log(response);
+        document.getElementById('bookForm').reset();
       },
-      failure: (err) => {
+      error: (err) => {
         if (err) {
-          console.log(err);
+          // console.log(err.responseJSON.message);
+          const bookError = err.responseJSON.message;
+          console.log(bookError);
+          bookError.map((data) => {
+            console.log(data.msg);
+            const ul = $('#error-message')
+            const li = $('<li></li>');
+            li.text(data.msg);
+            ul.append(li);
+          });
         }
       },
     });

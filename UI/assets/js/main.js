@@ -28,7 +28,7 @@ function getAllCategories() {
     .then(res => res.json())
     .then((parsedCategories) => {
       const myData = parsedCategories;
-      const select = document.getElementById('select');
+      const select = document.getElementById('categoryId');
       myData.data.map((data) => {
         const option = document.createElement('OPTION');
         option.value = data.category_id;

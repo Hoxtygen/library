@@ -72,6 +72,11 @@
                 <div class="book-container-wrapper">
                     <div class="container">
                         <div class="row">
+                            <ul id="error-message">
+                                
+                            </ul>
+                        </div>
+                        <div class="row">
                             <div class="col-12 mx">
                                 <div id="book-container">
 
@@ -90,7 +95,6 @@
                                 <div class="col-8 mx wrap">
                                     <span class="closeBtn">&times;</span>
                                     <div class="form-title">
-                                        <!-- <span class="closeBtn">&times;</span> -->
                                         <h2>Add New Book</h2>
                                     </div>
                                     <form method="POST" class="bookForm" name="bookForm">
@@ -109,7 +113,7 @@
                                             <input type="text" name="publisher" id="publisher" required placeholder="Enter the book publisher">
                                         </div>
                                         <div class="single-input mb-10">
-                                            <select name="category_id" id="select" required>
+                                            <select name="category_id" id="categoryId" required>
                                                 <option value="" disabled selected>Select a category</option>
                                             </select>
                                         </div>
