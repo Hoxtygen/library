@@ -1,6 +1,7 @@
+/* eslint-disable camelcase */
+/* eslint-disable no-undef */
 $(document).ready(() => {
   $('#submit').on('click', (event) => {
-    console.log('hello, i am clicked');
     const title = $('#title');
     const author_id = $('#authorId');
     const pubyear = $('#pub_year');
@@ -23,7 +24,12 @@ $(document).ready(() => {
       }),
       success: (response) => {
         console.log(response);
-        document.getElementById('bookForm').reset();
+        $('#title').val('');
+        $('#authorId').val('');
+        $('#pub_year').val('');
+        $('#categoryId').val('');
+        $('#publisher').val('');
+        $('#imageUrl').val('');
       },
       error: (err) => {
         if (err) {
@@ -32,7 +38,7 @@ $(document).ready(() => {
           console.log(bookError);
           bookError.map((data) => {
             console.log(data.msg);
-            const ul = $('#error-message')
+            const ul = $('#error-message');
             const li = $('<li></li>');
             li.text(data.msg);
             ul.append(li);
@@ -42,4 +48,3 @@ $(document).ready(() => {
     });
   });
 });
-console.log('Holla at your man anytime');

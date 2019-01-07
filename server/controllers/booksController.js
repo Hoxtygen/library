@@ -58,7 +58,7 @@ class BookController {
       .withMessage('Publication year must be at least and at most four characters long');
     req.checkBody('publisher', 'Publisher name is required').notEmpty().trim();
     req.checkBody('author_id', 'Author id is required').isNumeric().notEmpty();
-    req.checkBody('category_id', 'Category id is required').isNumeric().notEmpty();
+    req.checkBody('category_id', 'Category id is required').notEmpty();
     req.checkBody('image_url').notEmpty().withMessage('Image url is required')
       .isURL()
       .withMessage('invalid url');

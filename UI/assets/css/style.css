@@ -475,3 +475,7 @@ input:focus     {
     line-height: 40px;
     cursor: pointer;
 }
+
+.wrong-input    {
+    border: 1px solid red;
+}
