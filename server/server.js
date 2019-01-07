@@ -9,7 +9,8 @@ const app = express();
 
 //  port
 const port = process.env.PORT || 5001;
-app.use(express.static(__dirname));
+//  app.use(express.static(__dirname));
+app.use(express.static('UI'));
 
 //  use bodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
