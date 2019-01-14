@@ -9,73 +9,49 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
+
+    <header class="default-header">
+        <div class="sticky-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <a href="#">Lib<span>X</span></a>
+                    </div><!--logo closed-->
+                    <div class="search-form">
+                        <form class="form-inline" action="submit">
+                            <input type="text" class="search-box" id = "search-box" name="search-box" placeholder="Search by title">
+                            <button type="submit" class="btn btn-search">Search</button>
+                            <label for="search-box"><span class="fa fa-search search-icon"></span></label>
+                            <!-- <input type="submit" name="search-submit" id="search-submit" value="Search"> -->
+                        </form>
+                    </div><!--search-form closed-->
+                    <div class="image-user">
+                        <img src="./assets/images/doug.jpg" alt="user picture" height="50px" width="50px">
+                    </div>
+                </div><!-- header-content closed -->
+            </div> <!-- container closed -->   
+        </div><!-- sticky header closed --> 
+    </header>
     <div id="wrapper">
-        <header>
-            <div class="header-content">
-                <form class="form-inline">
-                    <input type="text" class="search-box" id = "search-box" name="search-box" placeholder="search">
-                    <!-- <button type="submit" class="btn btn-search">Search</button> -->
-                    <label for="search-box"><span class="fa fa-search search-icon"></span></label>
-                    <input type="search" name="search-submit" id="search-submit">
-                </form>
-                <div class="image-user">
-                    <img src="./assets/images/doug.jpg" alt="user picture" height="50px" width="50px">
-                </div>
-            </div>
-        </header>
         <aside>
             <div class="sidebar">
-            <section id="logo">
-                <h3 class="logo">Library</h3>
-            </section>
-            <a class="btn addNew" id ="addNew"><span><i class="fa fa-plus"></i></span>Add New</a>
+            
+            <a href="newBook.html" class="btn addNew" id ="addNew"><span><i class="fa fa-plus"></i></span> Add Book</a>
             <section class="category">
                 <h3 class="section-title"><span><i class="fa fa-list-alt"></i></span>Categories</h3>
                 <ul class="navbar-nav">
-                    <li><a class="btn side" href="#"><span><i class="fa fa-book"></i></span>Novel</a></li>
+                    <li><a class="btn side" href="#">Novel</a></li>
                     <li><a class="btn side" href="#"><span><i class="fa fa-book-open"></i></span>Textbook</a></li>
-                </ul>
-            </section>
-            <section class="reading-list">
-                <h3 class="section-title">Reading List</h3>
-                <ul class="navbar-nav">
-                    <li><a class="btn side" href="#" rel="noopener noreferrer">Novel</a></li>
-                    <li><a class="btn side" href="#" rel="noopener noreferrer">Textbook</a></li>
+                    <li><a class="btn side" href="#"><span><i class="fa fa-book-open"></i></span>Motivational</a></li>
+                    <li><a class="btn side" href="#"><span><i class="fa fa-book-open"></i></span>Inspirational</a></li>
                 </ul>
             </section>
             </div>
         </aside>
         <main>
-            <section id="filter-content">
-                <div class="container">
-                    <div class="row">
-                        <div class="filter-bar">
-                            <span><strong>Filter by: </strong></span>
-                            <label for="author">Author</label>
-                            <select name="author" id="author">
-                                <option value="all" disabled selected>All</option>
-                                <option value="deaver">Jeffery Deaver</option>
-                                <option value="connelly">Michael Connelly</option>
-                                <option value="cook">Robin Cook</option>
-                            </select>
-                            <label for="category">Category</label>
-                            <select name="category" id="category">
-                                <option value="all" disabled selected>All</option>
-                                <option value="novel">Novel</option>
-                                <option value="text-book">Textbook</option>
-                            </select>                   
-                        </div><!-- filter-bar closed -->
-                    </div><!-- row closed -->
-                </div><!-- container closed -->
-            </section>
             <section id="main-content">
                 <div class="book-container-wrapper">
                     <div class="container">
-                        <div class="row">
-                            <ul id="error-message">
-
-                            </ul>
-                        </div>
                         <div class="row">
                             <div class="col-12 mx">
                                 <div id="book-container">
@@ -86,57 +62,6 @@
                     </div>
                 </div>
             </section>
-
-            <section class="book-form" id="form-modal">
-                <div class="container">
-                    <div class = "row jcc">
-                        <div class="col-8 mx">
-                            <div class="form-wrapper jcc">
-                                <div class="col-8 mx wrap">
-                                    <span class="closeBtn">&times;</span>
-                                    <div class="form-title">
-                                        <h2>Add New Book</h2>
-                                    </div>
-                                    <form method="POST" class="bookForm" name="bookForm" onsubmit="return validateForm(this)">
-                                        <div class="single-input mb-10">
-                                            <input type="text" name="title" id="title" required placeholder="Enter the book title">
-                                            <p class="error"></p>
-                                        </div>
-                                        <div class="single-input mb-10">
-                                            <select name="author_id" id="authorId">
-                                                <option value="" disabled selected>Select an author</option>
-                                            </select>
-                                            <p class="error"></p>
-                                        </div>
-                                        <div class="single-input mb-10">
-                                            <input type="number" name="pubyear" id="pub_year" required placeholder="Enter book year of publication">
-                                            <p class="error"></p>
-                                        </div>
-                                        <div class="single-input mb-10">
-                                            <input type="text" name="publisher" id="publisher" required placeholder="Enter the book publisher">
-                                            <p class="error"></p>
-                                        </div>
-                                        <div class="single-input mb-10">
-                                            <select name="category_id" id="categoryId" required>
-                                                <option value="" disabled selected>Select a category</option>
-                                            </select>
-                                            <p class="error"></p>
-                                        </div>
-                                        <div class="single-input mb-10">
-                                            <input type="url" name="imageUrl" id="imageUrl" required placeholder="Enter the full book image url">
-                                            <p class="error"></p>
-                                        </div>
-                                        <div class="d-flex jcc">
-                                            <input type="submit" value="Submit" id = 'submit' class="primary-btn mt-10 d-if text-uppercase aic">
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
         </div>
         </main>
         <footer>
@@ -147,11 +72,9 @@
         <form action="" method="post"></form>
     </div>
 
-    <script src="./assets/js/jquery-3.1.1.min.js"></script>
+   
     <script src="./assets/js/main.js"></script>
-    <script src="./assets/js/modal.js"></script>
     <script src="./assets/js/validate.js"></script>
-    <script src="./assets/js/script.js"></script>
     <script>
         //  https://codepen.io/sdaitzman/pen/rmqfB
         //document.addEventListener("touchstart", function(){}, true);
