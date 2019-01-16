@@ -33,7 +33,7 @@ $(document).ready(() => {
       },
       error: (err) => {
         if (err) {
-          // console.log(err.responseJSON.message);
+          console.log(err.responseJSON.message);
           const bookError = err.responseJSON.message;
           console.log(bookError);
           bookError.map((data) => {
