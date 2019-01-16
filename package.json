@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "engines": {
+    "node": "11.5.0",
+    "npm": "6.4.1"
+  },
   "scripts": {
     "clean": "rm -rf dist && mkdir dist",
     "dev": "babel-watch server/server.js",
