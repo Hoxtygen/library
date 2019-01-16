@@ -1,5 +1,5 @@
 function getAllCategories() {
-  fetch('http://localhost:5001/api/v1/categories')
+  fetch('/api/v1/categories')
     .then(res => res.json())
     .then((parsedCategories) => {
       const myData = parsedCategories;
@@ -15,7 +15,7 @@ function getAllCategories() {
 getAllCategories();
 
 function getAllAuthors() {
-  fetch('http://localhost:5001/api/v1/authors')
+  fetch('/api/v1/authors')
     .then(res => res.json())
     .then((parsedAuthors) => {
       //  console.log(parsedAuthors);
