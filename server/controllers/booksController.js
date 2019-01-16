@@ -15,7 +15,7 @@ class BookController {
    * @memberof BookController
    */
   static getAllBooks(req, res) {
-    dbConfig.query('SELECT * FROM book_library.books')
+    dbConfig.query('SELECT * FROM book_library.books INNER JOIN book_library.authors ON book_library.authors.author_id = book_library.books.author_id')
       .then((books) => {
         res.status(200).json({
           status: true,
