@@ -1,6 +1,6 @@
 /* eslint-disable no-multi-assign */
 function getAllBooks() {
-  fetch('http://localhost:5001/api/v1/books')
+  fetch('/api/v1/books')
     .then(res => res.json())
     .then((parsedData) => {
       const bookContainer = document.getElementById('book-container').innerHTML = `

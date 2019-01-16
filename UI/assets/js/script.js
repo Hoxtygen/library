@@ -11,7 +11,7 @@ $(document).ready(() => {
     // const bookData =
     event.preventDefault();
     $.ajax({
-      url: 'http://localhost:5001/api/v1/books/',
+      url: '/api/v1/books/',
       method: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
