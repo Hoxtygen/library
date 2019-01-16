@@ -15,7 +15,7 @@ class BookController {
    * @memberof BookController
    */
   static getAllBooks(req, res) {
-    dbConfig.query('SELECT * FROM book_library.books NATURAL JOIN authors NATURAL JOIN categories')
+    dbConfig.query('SELECT * FROM book_library.books')
       .then((books) => {
         res.status(200).json({
           status: true,
