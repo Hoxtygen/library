@@ -1,3 +1,5 @@
+CREATE SCHEMA book_library
+
 CREATE TABLE IF NOT EXISTS book_library.authors (
     book_id SERIAL PRIMARY KEY NOT NULL,
     author_name VARCHAR(100) NOT NULL
