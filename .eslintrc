@@ -6,6 +6,6 @@
      "no-console":"off"
   },
   "env": {
-  "node": true
+  "node": true,
 }
 }
