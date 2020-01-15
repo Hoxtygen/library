@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import bodyParser from 'body-parser';
 import validator from 'express-validator';
 import booksRouter from './routes/booksRoute';
@@ -13,6 +14,7 @@ const port = process.env.PORT || 5001;
 app.use(express.static('UI'));
 
 //  use bodyParser
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(validator());
